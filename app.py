@@ -61,11 +61,17 @@ async def plgjcx():
             'code': 400,
             'message': '请求数据必须包含 date_start、date_end 字段，且 id_no 必须是数组类型'
         })
-    results = await pw.plgjcx(date_start, date_end, id_no_list)
+    # 构建参数字典
+    params = {
+        'date_start': date_start,
+        'date_end': date_end,
+        'id_no_list': id_no_list
+    }
+    results = await pw.plgjcx(params)
     return jsonify({
         'code': 900,
         'data': results
     })
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=2325)
+    app.run(host='0.0.0.0', port=5000)

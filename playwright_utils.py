@@ -11,6 +11,8 @@ class PW:
         self.browser = None
         self.context = None
         self.timeout = 30000  # 30 秒超时时间
+        self.dir = r'C:\Personal\Projects\Python\python-wa\data'
+        os.makedirs(os.path.dirname(self.dir), exist_ok=True)
 
     async def init(self):
         if not self.browser or await self.browser.is_closed():
@@ -79,7 +81,7 @@ class PW:
                 fill_actions = [
                     ('xpath=/html/body/div[1]/div/div/div/div[1]/div[2]/div/div[4]/div/div[2]/input', id_no)
                 ]
-                save_path = r'C:\Personal\Projects\Data\关联查询.xlsx'
+                save_path = os.path.join(self.dir, r'关联查询.xlsx')
                 result = await self._fill_form_and_download(page, form_script, fill_actions, save_path)
                 all_results.extend(result)
         elif query_type == 'zzcx':
@@ -102,7 +104,7 @@ class PW:
                     ('xpath=/html/body/div[1]/div/div/div/div[1]/div[2]/div/div[3]/div/div[2]/input', from_station),
                     ('xpath=/html/body/div[1]/div/div/div/div[1]/div[2]/div/div[4]/div/div[2]/input', to_station)
                 ]
-                save_path = r'C:\Personal\Projects\Data\站站查询.xlsx'
+                save_path = os.path.join(self.dir, r'站站查询.xlsx')
                 result = await self._fill_form_and_download(page, form_script, fill_actions, save_path)
                 all_results.extend(result)
         elif query_type == 'plgjcx':
@@ -118,14 +120,14 @@ class PW:
             '''
             await page.evaluate(form_script)
             # 在本地生成一个 txt，把传递的 id_no_list 都写入进去
-            txt_path = r'C:\Personal\Projects\Data\id_no_list.txt'
+            txt_path = os.path.join(self.dir, r'id_no_list.xlsx')
             with open(txt_path, 'w') as f:
                 for id_no in id_no_list:
                     f.write(id_no + '\n')
             # 上传这个 txt
             file_input = await page.wait_for_selector('input[type=file]', timeout=self.timeout)
             await file_input.set_input_files(txt_path)
-             # 点击 upload 按钮
+            # 点击 upload 按钮
             await page.click('#upload', timeout=self.timeout)
 
             # 等待上传完成，可根据实际情况调整等待时间或使用更合适的等待条件
