@@ -46,7 +46,7 @@ class ExcelJS:
                     '售票时间': row[17]
                 })
         if data:
-            data.pop(0)  # 移除表头
+            data.pop(0)
         return data
 
 exceljs = ExcelJS()

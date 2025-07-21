@@ -1,1 +1,57 @@
 browser/
+
+# 常见的Python生成文件和目录
+__pycache__/
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+*.dist-info/
+
+# 虚拟环境
+venv/
+env/
+.venv/
+pipenv/
+.conda/
+
+# 日志文件和数据库
+*.log
+*.sql
+*.sqlite
+
+# 配置文件（如果不想提交敏感信息）
+config.ini
+secrets.json
+.env
+
+# 编辑器和IDE配置
+.idea/
+.vscode/
+*.sublime-workspace
+*.sublime-project
+
+# 临时文件和缓存
+*.bak
+*.swp
+*.tmp
+.cache/
+.pytest_cache/
+.tox/
+
+# 测试报告
+htmlcov/
+coverage.xml
+nosetests.xml
+
+# 打包文件
+*.zip
+*.tar
+*.tar.gz
+*.rar
+*.7z
+
+# Jupyter Notebook
+.ipynb_checkpoints/
