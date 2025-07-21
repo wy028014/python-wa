@@ -1,4 +1,5 @@
 browser/
+data/
 
 # 常见的Python生成文件和目录
 __pycache__/
